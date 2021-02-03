@@ -15,6 +15,19 @@ router.get('/', (req, res) => {
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log("is authenticated?", req.isAuthenticated())
+  console.log("user is:", req.user)
+  const query = `
+                INSERT INTO "item" ("description", "image_url", "user_id")
+                VALUES($1, $2, $3);`;
+  pool
+  .query(query, [req.body.description, req.body.image_url, req.user.id])
+  .then((result) => {
+    res.sendStatus(201)
+  })
+  .catch(err => {
+    console.log("ERROR in POST", err);
+    res.sendStatus(500);
+  })
 });
 
 /**

@@ -9,7 +9,7 @@ function* addItem(action) {
     try {
         const item = action.payload
         yield axios.post('/api/shelf', item);
-        // yield put GET request
+        yield put({type: 'FETCH_SHELF'});
     } catch (err) {
         console.log(err);
     }
