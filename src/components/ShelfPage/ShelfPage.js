@@ -36,7 +36,7 @@ function ShelfPage() {
       )}
 
       {shelf?.map((item) => (
-        <ShelfItem item={item}/>
+        <ShelfItem key={item.id} item={item}/>
       ))}
 
     </div>

@@ -11,6 +11,16 @@ function* addItem(action) {
     }
 }
 
+function* deleteItem(action) {
+  try {
+    const idToDelete = action.payload
+    yield axios.delete(`/api/shelf/${idToDelete}`)
+    yield put({type: 'FETCH_SHELF'});
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 function* fetchShelf() {
   try {
     const response = yield axios.get("/api/shelf");
@@ -23,6 +33,7 @@ function* fetchShelf() {
 function* shelfSaga() {
   yield takeEvery("FETCH_SHELF", fetchShelf);    
   yield takeEvery('ADD_ITEM', addItem);
+  yield takeEvery('DELETE_ITEM', deleteItem);
 }
 
 export default shelfSaga;
