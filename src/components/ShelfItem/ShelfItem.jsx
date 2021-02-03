@@ -1,9 +1,10 @@
 import './ShelfItem.css'
 
-function ShelfItem() {
+function ShelfItem({item}) {
   return (
-    <div>
-      <p>Here is Item:</p>
+    <div key={item.id}>
+      <h3>{item.description}</h3>
+      <img src={item.image_url} alt={item.description}/>
     </div>
   )
 };

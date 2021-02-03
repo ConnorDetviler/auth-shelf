@@ -21,7 +21,7 @@ function ShelfPage() {
       <h2>Shelf</h2>
       <p>All of the available items can be seen here.</p>
       {shelf?.map((item) => (
-        <ShelfItem/>
+        <ShelfItem item={item}/>
       ))}
     </div>
   );
