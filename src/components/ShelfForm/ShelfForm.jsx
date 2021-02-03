@@ -7,7 +7,10 @@ function ShelfForm() {
 
     const dispatch = useDispatch();
 
-    let [newItem, setNewItem] = useState({})
+    let [newItem, setNewItem] = useState({
+        description: '',
+        image_url: ''
+    })
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -15,11 +18,16 @@ function ShelfForm() {
         setNewItem({...newItem, [event.target.name]: value})
     }
 
-    const placeItem = () => {
+    const placeItem = (event) => {
+        event.preventDefault();
         dispatch({
             type: 'ADD_ITEM',
             payload: newItem
         })
+        setNewItem({
+            description: '',
+            image_url: ''
+        });
     }
 
     return (
@@ -29,12 +37,14 @@ function ShelfForm() {
                 placeholder="description"
                 name="description"
                 onChange={handleChange}
+                value={newItem.description}
             />
             <input
                 type="text"
                 placeholder="image url"
                 name="image_url"
                 onChange={handleChange}
+                value={newItem.image_url}
             />
             <input type="submit" />
         </form>
